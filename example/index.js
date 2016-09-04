@@ -1,12 +1,19 @@
 import Bar from '../index'
 
-const data = []
+const gen = n => {
+  const data = []
 
-for (let i = 0, n = 10; i < n; ++i) {
-  data.push(Math.floor(Math.random() * n))
+  for (let i = 0; i < n; ++i) {
+    data.push({
+      value: Math.max(10, Math.floor(Math.random() * 100))
+    })
+  }
+
+  return data
 }
 
 const bar = new Bar({
-  target: '.container',
-  data: data
+  target: '.container'
 })
+
+bar.render(gen(20))

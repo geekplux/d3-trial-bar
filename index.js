@@ -1,53 +1,93 @@
 import { select, scaleLinear, max } from 'd3'
 
-const defaultOptions = {
-  class: 'bar',
+/**
+ * Default config.
+ */
+
+const defaults = {
+  // target element or selector to contain the svg
+  target: null,
+
+  // class of the svg
+  className: 'bar',
+
+  // width of chart
   width: 500,
+
+  // height of chart
   height: 200,
-  barWidth: 50,
-  barPadding: 5
+
+  // padding between bars
+  barPadding: 5,
+
+  // margin
+  margin: { top: 15, right: 0, bottom: 35, left: 60 },
+
+  // fill color
+  color: 'steelblue'
 }
+
+/**
+ * BarChart.
+ */
 
 export default class Bar {
 
+  /**
+   * Construct with the given `config`.
+   */
+
   constructor (options) {
-    this.init(options)
+    this.set(options)
+    this.init()
   }
 
+  /**
+   * Set configuration options.
+   */
+
+  set (options) {
+    Object.assign(this, defaults, options)
+  }
+
+  /**
+   * Initialize the chart.
+   */
+
   init (options) {
-    const config = Object.assign(defaultOptions, options)
+    const { target, className, width, height } = this
 
-    const y = scaleLinear()
-            .domain([0, max(config.data)])
-            .range([0, config.height])
+    this.y = scaleLinear()
+            .range([0, height])
 
-    this.chart = select(config.target)
-
-    const svg = this.chart
+    this.chart = select(target)
             .append('svg')
-            .attr('class', config.class)
-            .attr('width', config.width)
-            .attr('height', config.height)
+            .attr('class', className)
+            .attr('width', width)
+            .attr('height', height)
+  }
 
-    const group = svg
+  /**
+   * Render the chart through the given `data`
+   */
+  render (data) {
+    const { width, height, barPadding, y, color } = this
+    const barWidth = width / data.length
+
+    y.domain([0, max(data, d => d.value)])
+
+    const group = this.chart
             .selectAll('g')
-            .data(config.data)
+            .data(data)
             .enter()
             .append('g')
-            .attr('transform', (d, i) => `translate(${i * config.barWidth}, 0)`)
+            .attr('transform', (d, i) => `translate(${i * barWidth}, 0)`)
 
     group
       .append('rect')
-      .attr('y', d => config.height - y(d))
-      .attr('width', config.barWidth - config.barPadding)
-      .attr('height', y)
-
-    group
-      .append('text')
-      .attr('x', config.barWidth / 2)
-      .attr('y', config.height - 10)
-      .attr('fill', '#fff')
-      .attr('dy', '.35em')
-      .text(d => d)
+      .attr('y', d => height - y(d.value))
+      .attr('width', barWidth - barPadding)
+      .attr('height', d => y(d.value))
+      .style('fill', color)
   }
 }

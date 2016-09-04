@@ -1,6 +1,6 @@
 {
   "name": "d3-trial-bar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "D3 trial bar chart",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": {
     "name": "geekplux",
     "email": "geekplux@gmail.com",
-    "url": "github.com/egoist"
+    "url": "github.com/geekplux"
   },
   "license": "MIT",
   "devDependencies": {
