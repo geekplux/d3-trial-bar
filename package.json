@@ -4,6 +4,7 @@
   "description": "D3 trial bar chart",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --config webpack.config.dev.js",
     "test": "test"
   },
   "keywords": [
@@ -17,5 +18,15 @@
     "email": "geekplux@gmail.com",
     "url": "github.com/egoist"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  },
+  "dependencies": {
+    "d3": "^4.2.2"
+  }
 }
