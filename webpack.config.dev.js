@@ -17,7 +17,7 @@ module.exports = {
       loader: 'babel-loader'
     }]
   },
-  devtool: 'cheap-source-map',
+  // devtool: 'cheap-source-map',
   devServer: {
     contentBase: EXAMPLE,
     inline: true,

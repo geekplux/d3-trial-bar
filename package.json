@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js",
-    "test": "test"
+    "build": "webpack --config webpack.config.prod.js",
+    "test": "test",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "d3",
