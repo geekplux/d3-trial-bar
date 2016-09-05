@@ -42,6 +42,10 @@ const defaults = {
   axisPadding: 5
 }
 
+/**
+ * d3 axis methods map.
+ */
+
 const axisMap = {
   left: d3axisLeft,
   right: d3axisRight,
@@ -162,6 +166,7 @@ export default class Bar {
   /**
    * Render the chart through the given `data`
    */
+
   render (data) {
     this.data = data
     this.renderAxis(data)
