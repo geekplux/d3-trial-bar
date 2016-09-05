@@ -13,7 +13,8 @@ const gen = n => {
 }
 
 const bar = new Bar({
-  target: '.container'
+  target: '.container',
+  enableAxis: true
 })
 
 bar.render(gen(20))
