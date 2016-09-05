@@ -27,7 +27,7 @@ const defaults = {
   barPadding: 5,
 
   // margin
-  margin: { top: 20, right: 0, bottom: 40, left: 60 },
+  margin: { top: 20, right: 20, bottom: 40, left: 40 },
 
   // bars fill color
   barsFill: 'steelblue',
@@ -103,7 +103,7 @@ export default class Bar {
     this.xScale = d3scaleLinear()
       .range([0, w])
     this.yScale = d3scaleLinear()
-      .range([0, h])
+      .range([h, 0])
 
     if (enableAxis) {
       this.xAxis = axisMap[axisOrient.x](this.xScale)
@@ -118,8 +118,11 @@ export default class Bar {
   renderAxis (data) {
     if (!this.enableAxis) return
 
-    const { xAxis, yAxis, axisPadding } = this
+    const { xScale, yScale, xAxis, yAxis, axisPadding } = this
     const [w, h] = this.dimensions()
+
+    xScale.domain([0, data.length])
+    yScale.domain([0, d3max(data, d => d.value)])
 
     this.chart.append('g')
       .attr('class', 'x axis')
@@ -137,7 +140,7 @@ export default class Bar {
    */
 
   renderBars (data) {
-    const { width, height, barPadding, yScale, barsFill } = this
+    const { barPadding, yScale, barsFill } = this
     const [w, h] = this.dimensions()
     const barWidth = w / data.length
 
@@ -149,9 +152,9 @@ export default class Bar {
       .enter()
       .append('rect')
       .attr('class', 'bar')
-      .attr('y', d => h - yScale(d.value))
+      .attr('y', d => yScale(d.value))
       .attr('width', barWidth - barPadding)
-      .attr('height', d => yScale(d.value))
+      .attr('height', d => h - yScale(d.value))
       .attr('transform', (d, i) => `translate(${i * barWidth}, 0)`)
       .style('fill', barsFill)
   }
