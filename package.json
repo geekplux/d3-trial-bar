@@ -1,6 +1,6 @@
 {
   "name": "d3-trial-bar",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "D3 trial bar chart",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "email": "geekplux@gmail.com",
     "url": "github.com/geekplux"
   },
+  "repository": "geekplux/d3-trial-bar",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.14.0",
