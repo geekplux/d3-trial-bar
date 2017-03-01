@@ -13,11 +13,15 @@ D3 bar chart.
 npm install d3-trial-bar
 ```
 
-### Development
+## Development
 
 ```
 npm start
 ```
+
+## Preview
+
+![](./preview/d3-trial-bar.png)
 
 ### LICENSE
 
